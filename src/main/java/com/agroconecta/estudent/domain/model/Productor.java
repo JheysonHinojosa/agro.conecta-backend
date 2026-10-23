@@ -1,27 +1,29 @@
 package com.agroconecta.estudent.domain.model;
 
 import lombok.*;
+import lombok.experimental.SuperBuilder;
 
 import java.time.LocalDate;
 
 @Getter
 @Setter
-@Builder
+@SuperBuilder
 @NoArgsConstructor
 @AllArgsConstructor
+public class Productor extends BaseModel {
 
-public class Productor extends  BaseModel{
+    private Long idProductor;
+    private Long idCentroAcopio;
+    private Integer idTipoDocumento;
+    private Integer idPais;
+    private Integer idCategoriaPrincipal;
+    private String nroDocumento;
+    private String nombreRazonSocial;
+    private String email;
+    private String telefono;
+    private String direccion;
+    private LocalDate fechaRegistro;
 
-    Long idProductor;
-    long idCentroAcopio;
-    Integer idTipoDocumento;
-    Integer idPais;
-    Integer idCategoriaPrincipal;
-    String nroDocumento;
-    String nombreRazonSocial;
-    String email;
-    String telefono;
-    String direccion;
-    LocalDate fechaRegistro;
-    Boolean activo;
+    @Builder.Default
+    private boolean activo = true;
 }
