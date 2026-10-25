@@ -11,7 +11,7 @@ import java.time.LocalDate;
 @SuperBuilder
 @NoArgsConstructor
 @AllArgsConstructor
-public class SensorIot extends BaseModel {
+public class SensorIOT extends BaseModel {
 
     private Long idSensor;
     private String codigoSensor;

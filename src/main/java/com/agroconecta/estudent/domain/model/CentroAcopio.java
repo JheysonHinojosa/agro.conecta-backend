@@ -25,5 +25,5 @@ public class CentroAcopio extends BaseModel {
     private String telefono;
 
     @Builder.Default
-    private boolean estado = true;
+    private boolean activo = true;
 }
