@@ -22,5 +22,5 @@ public class Comprador extends BaseModel {
     private String ciudad;
 
     @Builder.Default
-    private boolean estado = true;
+    private boolean activo = true;
 }

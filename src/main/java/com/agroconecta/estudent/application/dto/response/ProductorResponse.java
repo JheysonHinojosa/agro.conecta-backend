@@ -1,7 +1,7 @@
-package com.agroconecta.estudent.application.dto;
+package com.agroconecta.estudent.application.dto.response;
 
 
-public record RegistrarProductorCommand(
+public record ProductorResponse(
 
         long idCentroAcopio,
         Integer idTipoDocumento,

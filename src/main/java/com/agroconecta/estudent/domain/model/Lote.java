@@ -20,7 +20,7 @@ public class Lote extends BaseModel {
     private LocalDate fechaCosecha;
     private LocalDate fechaIngreso;
     private LocalDate fechaVencimiento;
-    private BigDecimal cantidadIngresada; // o Integer si siempre son unidades enteras
+    private BigDecimal cantidadIngresada;
     private String observacion;
 
     @Builder.Default
