@@ -1,20 +1,21 @@
 package com.agroconecta.estudent.application.dto.response;
 
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
 
 public record AlertaResponse(
-        long idAlerta,
+        Long idAlerta,
         Integer idTipoAlerta,
-        long idCentroAcopio,
-        long idProductor,
-        long idSensor,
-        long idLector,
+        String nombreTipoAlerta,
+        Long idCentroAcopio,
+        Long idProducto,
+        Long idSensor,
+        Long idLectura,
         String mensaje,
         BigDecimal valorMedido,
         BigDecimal valorUmbral,
-        LocalDateTime fechaAlerta,
-        LocalDateTime fechaAtencion,
-        String AtendidaPor,
-        boolean atendida
+        OffsetDateTime fechaAlerta,
+        boolean atendida,
+        OffsetDateTime fechaAtencion,
+        String atendidaPor
 ) {}

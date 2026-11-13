@@ -10,12 +10,12 @@ import lombok.experimental.SuperBuilder;
 @AllArgsConstructor
 public class ParMoneda extends BaseModel {
 
-    private Integer idMoneda;
-    private String codigo;
-    private String nombre;
-    private String simbolo;
+     Integer idMoneda;
+     String codigo;
+     String nombre;
+     String simbolo;
 
     @Builder.Default
-    private boolean activo = true;
+     boolean activo = true;
 
 }

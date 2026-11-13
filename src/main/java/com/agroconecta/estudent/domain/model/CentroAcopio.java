@@ -12,17 +12,17 @@ import java.math.BigDecimal;
 @AllArgsConstructor
 public class CentroAcopio extends BaseModel {
 
-    private long idCentroAcopio;
-    private String codigo;
-    private String nombre;
-    private Integer idPais;
-    private String ciudad;
-    private String direccion;
-    private BigDecimal latitud;
-    private BigDecimal longitud;
-    private BigDecimal capacidadKg;
-    private String responsable;
-    private String telefono;
+     long idCentroAcopio;
+     String codigo;
+     String nombre;
+     Integer idPais;
+     String ciudad;
+     String direccion;
+     BigDecimal latitud;
+     BigDecimal longitud;
+     BigDecimal capacidadKg;
+     String responsable;
+     String telefono;
 
     @Builder.Default
     private boolean activo = true;

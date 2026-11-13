@@ -15,11 +15,11 @@ import java.time.LocalDate;
 @AllArgsConstructor
 public class ResenaLote extends BaseModel{
 
-    private long idResena;
-    private long idLote;
-    private long idComprador;
-    private long idPedido;
-    private String puntuacion;
-    private String comentario;
-    private LocalDate fechaResena;
+     long idResena;
+     long idLote;
+     long idComprador;
+     long idPedido;
+     String puntuacion;
+     String comentario;
+     LocalDate fechaResena;
 }

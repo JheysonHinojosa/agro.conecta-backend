@@ -13,9 +13,8 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 public class LecturaSensor extends BaseModel {
 
-    private long idLectura;
-    private long idSensor;
-    private LocalDateTime fechaLectura;
-    private BigDecimal temperaturaC;
-    private BigDecimal humedadPct;
+     long idLectura;
+     long idSensor;
+     BigDecimal temperaturaC;
+     BigDecimal humedadPct;
 }

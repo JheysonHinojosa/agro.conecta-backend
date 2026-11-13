@@ -10,11 +10,11 @@ import lombok.experimental.SuperBuilder;
 @AllArgsConstructor
 public class ParTipoMovimiento extends BaseModel {
 
-    private Integer idTipoMovimiento;
-    private String codigo;
-    private String nombre;
-    private String signo;
+     Integer idTipoMovimiento;
+     String codigo;
+     String nombre;
+     String signo;
 
     @Builder.Default
-    private boolean activo = true;
+     boolean activo = true;
 }

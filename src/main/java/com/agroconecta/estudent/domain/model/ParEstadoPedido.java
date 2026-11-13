@@ -10,12 +10,12 @@ import lombok.experimental.SuperBuilder;
 @AllArgsConstructor
 
 public class ParEstadoPedido extends BaseModel {
-    private Integer idEstadoPedido;
-    private String codigo;
-    private String nombre;
-    private String orden;
+     Integer idEstadoPedido;
+     String codigo;
+     String nombre;
+     String orden;
 
     @Builder.Default
-    private boolean esFinal = true;
-    private boolean activo = true;
+     boolean esFinal = true;
+     boolean activo = true;
 }

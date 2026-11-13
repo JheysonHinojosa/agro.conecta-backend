@@ -15,10 +15,10 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 public class HistorialEstadoPedido extends BaseModel {
 
-    private long idHistorial;
-    private long idPedido;
-    private Integer idEstadoAnterior;
-    private Integer idEstadoNuevo;
-    private LocalDateTime fechaCambio;
-    private String comentario;
+     long idHistorial;
+     long idPedido;
+     Integer idEstadoAnterior;
+     Integer idEstadoNuevo;
+     LocalDateTime fechaCambio;
+     String comentario;
 }

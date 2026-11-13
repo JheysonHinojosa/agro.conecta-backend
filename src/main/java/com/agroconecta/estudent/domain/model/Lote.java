@@ -13,16 +13,16 @@ import java.time.LocalDate;
 @AllArgsConstructor
 public class Lote extends BaseModel {
 
-    private Long idLote;
-    private String codigoLote;
-    private Long idProducto;
-    private Long idCentroAcopio;
-    private LocalDate fechaCosecha;
-    private LocalDate fechaIngreso;
-    private LocalDate fechaVencimiento;
-    private BigDecimal cantidadIngresada;
-    private String observacion;
+     Long idLote;
+     String codigoLote;
+     Long idProducto;
+     Long idCentroAcopio;
+     LocalDate fechaCosecha;
+     LocalDate fechaIngreso;
+     LocalDate fechaVencimiento;
+     BigDecimal cantidadIngresada;
+     String observacion;
 
     @Builder.Default
-    private boolean activo = true;
+     boolean activo = true;
 }

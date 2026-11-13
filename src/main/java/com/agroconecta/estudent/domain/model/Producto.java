@@ -12,16 +12,16 @@ import java.math.BigDecimal;
 @AllArgsConstructor
 public class Producto extends BaseModel {
 
-    private Long idProducto;
-    private String codigo;
-    private String nombre;
-    private String descripcion;
-    private Integer idCategoria;
-    private Integer idUnidadMedida;
-    private BigDecimal precioReferencial;
-    private Integer idMoneda;
-    private Long idProductor;
+     Long idProducto;
+     String codigo;
+     String nombre;
+     String descripcion;
+     Integer idCategoria;
+     Integer idUnidadMedida;
+     BigDecimal precioReferencial;
+     Integer idMoneda;
+     Long idProductor;
 
     @Builder.Default
-    private boolean activo = true;
+     boolean activo = true;
 }

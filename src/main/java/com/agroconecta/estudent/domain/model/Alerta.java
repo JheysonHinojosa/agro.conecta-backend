@@ -13,18 +13,18 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 public class Alerta extends BaseModel {
 
-    private long idAlerta;
-    private Integer idTipoAlerta;
-    private long idCentroAcopio;
-    private long idProductor;
-    private long idSensor;
-    private long idLector;
-    private String mensaje;
-    private BigDecimal valorMedido;
-    private BigDecimal valorUmbral;
-    private LocalDateTime fechaAlerta;
-    private LocalDateTime fechaAtencion;
-    private String AtendidaPor;
+     long idAlerta;
+     Integer idTipoAlerta;
+     long idCentroAcopio;
+     long idProductor;
+     long idSensor;
+     long idLector;
+     String mensaje;
+     BigDecimal valorMedido;
+     BigDecimal valorUmbral;
+     LocalDateTime fechaAlerta;
+     LocalDateTime fechaAtencion;
+     String AtendidaPor;
 
     @Builder.Default
     private boolean atendida = true;

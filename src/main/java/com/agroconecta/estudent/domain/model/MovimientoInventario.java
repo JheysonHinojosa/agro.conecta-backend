@@ -16,14 +16,14 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 public class MovimientoInventario extends BaseModel {
 
-    private Long idMovimiento;
-    private Long idInventario;
-    private Integer idTipoMovimiento;
-    private BigDecimal cantidad;
-    private BigDecimal stockAnterior;
-    private BigDecimal stockPosterior;
-    private Long idPedido;
-    private Long idLote;
-    private LocalDateTime fechaMovimiento;
-    private String observacion;
+     Long idMovimiento;
+     Long idInventario;
+     Integer idTipoMovimiento;
+     BigDecimal cantidad;
+     BigDecimal stockAnterior;
+     BigDecimal stockPosterior;
+     Long idPedido;
+     Long idLote;
+     LocalDateTime fechaMovimiento;
+     String observacion;
 }
