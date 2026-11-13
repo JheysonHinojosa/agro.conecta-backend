@@ -10,10 +10,10 @@ import lombok.experimental.SuperBuilder;
 @AllArgsConstructor
 public class ParTipoDocumento extends BaseModel {
 
-    private Integer idTipoDocumento;;
-    private String codigo;
-    private String nombre;
+     Integer idTipoDocumento;
+     String codigo;
+     String nombre;
 
     @Builder.Default
-    private boolean activo = true;
+     boolean activo = true;
 }

@@ -13,9 +13,9 @@ import lombok.experimental.SuperBuilder;
 @AllArgsConstructor
 public class Inventario extends BaseModel {
 
-    private long idInventario;
-    private long idCentroAcopio;
-    private long idProducto;
-    private int stockActual;
-    private int stockMinimo;
+     long idInventario;
+     long idCentroAcopio;
+     long idProducto;
+     int stockActual;
+     int stockMinimo;
 }

@@ -10,10 +10,10 @@ import lombok.experimental.SuperBuilder;
 @AllArgsConstructor
 public class ParUnidadMedida extends BaseModel {
 
-    private Integer idUnidadMedida;
-    private String codigo;
-    private String nombre;
+     Integer idUnidadMedida;
+     String codigo;
+     String nombre;
 
     @Builder.Default
-    private boolean activo = true;
+     boolean activo = true;
 }

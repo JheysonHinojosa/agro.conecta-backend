@@ -10,11 +10,11 @@ import lombok.experimental.SuperBuilder;
 @AllArgsConstructor
 public class ParCategoriaProducto extends BaseModel{
 
-    private Integer idCategoria;
-    private String codigo;
-    private String nombre;
-    private String descripcion;
+     Integer idCategoria;
+     String codigo;
+     String nombre;
+     String descripcion;
 
     @Builder.Default
-    private boolean activo = true;
+     boolean activo = true;
 }

@@ -10,11 +10,11 @@ import lombok.experimental.SuperBuilder;
 @AllArgsConstructor
 public class ParRol extends BaseModel {
 
-    private Integer idRol;
-    private String codigo;
-    private String nombre;
-    private String descripcion;
+     Integer idRol;
+     String codigo;
+     String nombre;
+     String descripcion;
 
     @Builder.Default
-    private boolean activo = true;
+     boolean activo = true;
 }

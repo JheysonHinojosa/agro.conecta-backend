@@ -10,10 +10,10 @@ import lombok.experimental.SuperBuilder;
 @AllArgsConstructor
 public class ParTipoAlerta extends BaseModel {
 
-    private Integer idTipoAlerta;
-    private String codigo;
-    private String nombre;
+     Integer idTipoAlerta;
+     String codigo;
+     String nombre;
 
     @Builder.Default
-    private boolean activo = true;
+     boolean activo = true;
 }

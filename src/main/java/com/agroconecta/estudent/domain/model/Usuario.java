@@ -12,16 +12,16 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 public class Usuario extends BaseModel {
 
-    private Long idUsuario;
-    private Integer idRol;
-    private String username;
-    private String email;
-    private String passwordHash;
-    private String nombres;
-    private String apellidos;
-    private Long idComprador;
-    private LocalDateTime ultimoAcceso;
+     Long idUsuario;
+     Integer idRol;
+     String username;
+     String email;
+     String passwordHash;
+     String nombres;
+     String apellidos;
+     Long idComprador;
+     LocalDateTime ultimoAcceso;
 
     @Builder.Default
-    private boolean activo = true;
+     boolean activo = true;
 }

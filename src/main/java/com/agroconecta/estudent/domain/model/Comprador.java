@@ -10,17 +10,17 @@ import lombok.experimental.SuperBuilder;
 @AllArgsConstructor
 public class Comprador extends BaseModel {
 
-    private long idComprador;
-    private Integer idTipoComprador;
-    private Integer idTipoDocumento;
-    private String nroDocumento;
-    private String nombreRazonSocial;
-    private String email;
-    private String telefono;
-    private String direccion;
-    private Integer idPais;
-    private String ciudad;
+     long idComprador;
+     Integer idTipoComprador;
+     Integer idTipoDocumento;
+     String nroDocumento;
+     String nombreRazonSocial;
+     String email;
+     String telefono;
+     String direccion;
+     Integer idPais;
+     String ciudad;
 
     @Builder.Default
-    private boolean activo = true;
+     boolean activo = true;
 }

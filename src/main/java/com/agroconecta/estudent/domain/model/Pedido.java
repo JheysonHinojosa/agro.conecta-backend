@@ -16,14 +16,14 @@ import java.time.LocalDate;
 @AllArgsConstructor
 public class Pedido extends BaseModel {
 
-    private Long idPedido;
-    private String codigoPedido;
-    private Long idComprador;
-    private Long idCentroAcopio;
-    private Integer idEstadoPedido;
-    private Integer idMoneda;
-    private LocalDate fechaPedido;
-    private LocalDate fechaEntregaEstimada;
-    private BigDecimal montoTotal;
-    private String observacion;
+     Long idPedido;
+     String codigoPedido;
+     Long idComprador;
+     Long idCentroAcopio;
+     Integer idEstadoPedido;
+     Integer idMoneda;
+     LocalDate fechaPedido;
+     LocalDate fechaEntregaEstimada;
+     BigDecimal montoTotal;
+     String observacion;
 }

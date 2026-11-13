@@ -10,10 +10,10 @@ import lombok.experimental.SuperBuilder;
 @AllArgsConstructor
 public class ParTipoComprador extends BaseModel {
 
-    private Integer idTipoComprador;
-    private String codigo;
-    private String nombre;
+     Integer idTipoComprador;
+     String codigo;
+     String nombre;
 
     @Builder.Default
-    private boolean activo = true;
+     boolean activo = true;
 }

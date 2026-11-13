@@ -13,16 +13,16 @@ import java.time.LocalDate;
 @AllArgsConstructor
 public class SensorIOT extends BaseModel {
 
-    private Long idSensor;
-    private String codigoSensor;
-    private Long idCentroAcopio;
-    private String descripcion;
-    private BigDecimal tempMinC;
-    private BigDecimal tempMaxC;
-    private BigDecimal humedadMinPct;
-    private BigDecimal humedadMaxPct;
-    private LocalDate fechaInstalacion;
+     Long idSensor;
+     String codigoSensor;
+     Long idCentroAcopio;
+     String descripcion;
+     BigDecimal tempMinC;
+     BigDecimal tempMaxC;
+     BigDecimal humedadMinPct;
+     BigDecimal humedadMaxPct;
+     LocalDate fechaInstalacion;
 
     @Builder.Default
-    private boolean activo = true;
+     boolean activo = true;
 }

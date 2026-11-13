@@ -15,11 +15,11 @@ import java.math.BigDecimal;
 @AllArgsConstructor
 public class DetallePedido extends BaseModel{
 
-    private long idDetallePedido;
-    private long idPedido;
-    private long idProducto;
-    private long idLote;
-    private int cantidad;
-    private BigDecimal precioUnitario;
-    private BigDecimal subtotal;
+     long idDetallePedido;
+     long idPedido;
+     long idProducto;
+     long idLote;
+     int cantidad;
+     BigDecimal precioUnitario;
+     BigDecimal subtotal;
 }
