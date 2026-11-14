@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("api/lectura_sensor")
+@RequestMapping("api/lectura-sensor")
 @RequiredArgsConstructor
 @Slf4j
 public class LecturaSensorController {
@@ -36,25 +36,23 @@ public class LecturaSensorController {
         return ResponseEntity.ok(response);
     }
 
-    @GetMapping("{id}")
-    public ResponseEntity<LecturaSensorResponse> buscarPorId(@PathVariable Integer id){
-        log.info("Buscando nueva lectura de sensor: {}", id);
-
+    @GetMapping("/{id}")
+    public ResponseEntity<LecturaSensorResponse> buscarPorId(@PathVariable Long id) {
+        log.info("Buscando lectura de sensor: {}", id);
         LecturaSensorResponse response = lecturaSensorService.buscarPorId(id);
-
         return ResponseEntity.ok(response);
     }
 
-    @PutMapping
-    public ResponseEntity<LecturaSensorResponse> actualizar(@PathVariable Integer id, @Valid @RequestBody LecturaSensorRequest request){
-        log.info("Actualizando la lectura de sensor con id: {}", id);
+    @PutMapping("/{id}")
+    public ResponseEntity<LecturaSensorResponse> actualizar(@PathVariable Long id, @Valid @RequestBody LecturaSensorRequest request) {
+        log.info("Actualizando lectura de sensor con id: {}", id);
         LecturaSensorResponse response = lecturaSensorService.actualizar(id, request);
         return ResponseEntity.ok(response);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<LecturaSensorResponse> eliminar(@PathVariable Integer id){
-        log.info("Eliminando la lectura de sensor: {}", id);
+    public ResponseEntity<Void> eliminar(@PathVariable Long id) {
+        log.info("Eliminando lectura de sensor: {}", id);
         lecturaSensorService.eliminar(id);
         return ResponseEntity.noContent().build();
     }

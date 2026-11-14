@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("api/centro_acopio")
+@RequestMapping("/api/centro-acopio")
 @RequiredArgsConstructor
 @Slf4j
 public class CentroAcopioController {
@@ -36,24 +36,22 @@ public class CentroAcopioController {
         return ResponseEntity.ok(response);
     }
 
-    @GetMapping("{id}")
-    public ResponseEntity<CentroAcopioResponse> buscarPorId(@PathVariable Integer id){
-        log.info("Buscando nuevo Centro Acopio: {}", id);
-
+    @GetMapping("/{id}")
+    public ResponseEntity<CentroAcopioResponse> buscarPorId(@PathVariable Long id) {
+        log.info("Buscando Centro Acopio: {}", id);
         CentroAcopioResponse response = centroAcopioService.buscarPorId(id);
-
         return ResponseEntity.ok(response);
     }
 
-    @PutMapping
-    public ResponseEntity<CentroAcopioResponse> actualizar(@PathVariable Integer id, @Valid @RequestBody CentroAcopioRequest request){
+    @PutMapping("/{id}")
+    public ResponseEntity<CentroAcopioResponse> actualizar(@PathVariable Long id, @Valid @RequestBody CentroAcopioRequest request) {
         log.info("Actualizando Centro Acopio con id: {}", id);
         CentroAcopioResponse response = centroAcopioService.actualizar(id, request);
         return ResponseEntity.ok(response);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<CentroAcopioResponse> eliminar(@PathVariable Integer id){
+    public ResponseEntity<Void> eliminar(@PathVariable Long id) {
         log.info("Eliminando Centro Acopio con id: {}", id);
         centroAcopioService.eliminar(id);
         return ResponseEntity.noContent().build();

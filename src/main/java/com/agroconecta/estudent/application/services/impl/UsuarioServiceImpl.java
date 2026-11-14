@@ -49,7 +49,9 @@ public class UsuarioServiceImpl implements UsuarioService {
         UsuarioEntity entity = usuarioMapper.toEntity(request);
         entity.setPasswordHash(passwordEncoder.encode(request.passwordHash()));
         entity.setRol(buscarRol(request.idRol()));
-        entity.setComprador(buscarComprador(request.idComprador()));
+        ParRolEntity rol = buscarRol(request.idRol());
+        entity.setRol(rol);
+        entity.setComprador(resolverComprador(rol, request.idComprador()));
 
         return usuarioMapper.toResponse(usuarioRepository.save(entity));
     }
@@ -83,9 +85,10 @@ public class UsuarioServiceImpl implements UsuarioService {
 
         usuarioMapper.updateEntity(entity, request);
         entity.setRol(buscarRol(request.idRol()));
-        entity.setComprador(buscarComprador(request.idComprador()));
+        ParRolEntity rol = buscarRol(request.idRol());
+        entity.setRol(rol);
+        entity.setComprador(resolverComprador(rol, request.idComprador()));
 
-        // La contraseña solo se cambia si viene en la petición
         if (request.passwordHash() != null && !request.passwordHash().isBlank()) {
             if (request.passwordHash().length() < MIN_PASSWORD_LENGTH) {
                 throw new IllegalArgumentException(
@@ -99,13 +102,10 @@ public class UsuarioServiceImpl implements UsuarioService {
 
     @Override
     public void eliminar(Long id) {
-        // Eliminación lógica
         UsuarioEntity entity = buscarUsuario(id);
         entity.setActivo(false);
         usuarioRepository.save(entity);
     }
-
-    // ---------- métodos privados ----------
 
     private UsuarioEntity buscarUsuario(Long id) {
         return usuarioRepository.findById(id)
@@ -117,8 +117,19 @@ public class UsuarioServiceImpl implements UsuarioService {
                 .orElseThrow(() -> new EntityNotFoundException("Rol no encontrado"));
     }
 
-    private CompradorEntity buscarComprador(Long idComprador) {
-        return compradorRepository.findById(idComprador)
-                .orElseThrow(() -> new EntityNotFoundException("Comprador no encontrado"));
+    private CompradorEntity resolverComprador(ParRolEntity rol, Long idComprador) {
+        boolean esComprador = "COMPRADOR".equals(rol.getCodigo());
+
+        if (esComprador) {
+            if (idComprador == null) {
+                throw new IllegalArgumentException("El rol COMPRADOR requiere un idComprador");
+            }
+            return compradorRepository.findById(idComprador)
+                    .orElseThrow(() -> new EntityNotFoundException("Comprador no encontrado"));
+        }
+        if (idComprador != null) {
+            throw new IllegalArgumentException("Solo el rol COMPRADOR puede tener un comprador asociado");
+        }
+        return null;
     }
 }

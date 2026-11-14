@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.Generated;
+import org.hibernate.generator.EventType;
 
 import java.math.BigDecimal;
 
@@ -37,6 +39,7 @@ public class DetallePedidoEntity extends BaseEntity {
     @Column(name = "precio_unitario", precision = 12, scale = 2)
     private BigDecimal precioUnitario;
 
-    @Column(name = "subtotal", precision = 14, scale = 2)
+    @Generated(event = {EventType.INSERT, EventType.UPDATE})
+    @Column(name = "subtotal", precision = 14, scale = 2, insertable = false, updatable = false)
     private BigDecimal subtotal;
 }
