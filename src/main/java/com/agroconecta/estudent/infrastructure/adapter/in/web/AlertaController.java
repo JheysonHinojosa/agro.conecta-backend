@@ -37,24 +37,22 @@ public class AlertaController {
         return ResponseEntity.ok(response);
     }
 
-    @GetMapping("{id}")
-    public ResponseEntity<AlertaResponse> buscarPorId(@PathVariable Integer id){
-        log.info("Buscando nueva alerta: {}", id);
-
+    @GetMapping("/{id}")
+    public ResponseEntity<AlertaResponse> buscarPorId(@PathVariable Long id) {
+        log.info("Buscando alerta: {}", id);
         AlertaResponse response = alertaService.buscarPorId(id);
-
         return ResponseEntity.ok(response);
     }
 
-    @PutMapping
-    public ResponseEntity<AlertaResponse> actualizar(@PathVariable Integer id, @Valid @RequestBody AlertaRequest request){
+    @PutMapping("/{id}")
+    public ResponseEntity<AlertaResponse> actualizar(@PathVariable Long id, @Valid @RequestBody AlertaRequest request) {
         log.info("Actualizando alerta con id: {}", id);
         AlertaResponse response = alertaService.actualizar(id, request);
         return ResponseEntity.ok(response);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<AlertaResponse> eliminar(@PathVariable Integer id){
+    public ResponseEntity<Void> eliminar(@PathVariable Long id) {
         log.info("Eliminando alerta con id: {}", id);
         alertaService.eliminar(id);
         return ResponseEntity.noContent().build();

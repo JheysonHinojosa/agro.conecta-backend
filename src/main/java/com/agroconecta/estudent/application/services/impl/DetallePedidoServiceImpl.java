@@ -18,8 +18,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.math.BigDecimal;
-import java.math.RoundingMode;
 import java.util.List;
 
 @Service
@@ -39,9 +37,8 @@ public class DetallePedidoServiceImpl implements DetallePedidoService {
 
         DetallePedidoEntity entity = detallePedidoMapper.toEntity(request);
         asignarRelaciones(entity, request);
-        entity.setSubtotal(calcularSubtotal(entity));
 
-        DetallePedidoEntity saved = detallePedidoRepository.save(entity);
+        DetallePedidoEntity saved = detallePedidoRepository.saveAndFlush(entity);
         pedidoService.recalcularMonto(saved.getPedido().getIdPedido());
 
         return detallePedidoMapper.toResponse(saved);
@@ -71,7 +68,6 @@ public class DetallePedidoServiceImpl implements DetallePedidoService {
 
         detallePedidoMapper.updateEntity(entity, request);
         asignarRelaciones(entity, request);
-        entity.setSubtotal(calcularSubtotal(entity));
 
         DetallePedidoEntity saved = detallePedidoRepository.save(entity);
         detallePedidoRepository.flush();
@@ -111,17 +107,10 @@ public class DetallePedidoServiceImpl implements DetallePedidoService {
         entity.setLote(lote);
     }
 
-    /** No se pueden agregar, editar ni quitar detalles de un pedido en estado final. */
     private void validarPedidoModificable(PedidoEntity pedido) {
         if (pedido.getEstadoPedido().isEsFinal()) {
             throw new IllegalArgumentException("El pedido está en un estado final y no puede modificarse");
         }
-    }
-
-    private BigDecimal calcularSubtotal(DetallePedidoEntity entity) {
-        return entity.getCantidad()
-                .multiply(entity.getPrecioUnitario())
-                .setScale(2, RoundingMode.HALF_UP);
     }
 
     private DetallePedidoEntity buscarDetalle(Long id) {

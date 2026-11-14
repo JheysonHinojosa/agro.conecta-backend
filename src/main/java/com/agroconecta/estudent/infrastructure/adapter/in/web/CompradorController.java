@@ -36,24 +36,22 @@ public class CompradorController {
         return ResponseEntity.ok(response);
     }
 
-    @GetMapping("{id}")
-    public ResponseEntity<CompradorResponse> buscarPorId(@PathVariable Integer id){
-        log.info("Buscando nuevo comprador: {}", id);
-
+    @GetMapping("/{id}")
+    public ResponseEntity<CompradorResponse> buscarPorId(@PathVariable Long id) {
+        log.info("Buscando comprador: {}", id);
         CompradorResponse response = compradorService.buscarPorId(id);
-
         return ResponseEntity.ok(response);
     }
 
-    @PutMapping
-    public ResponseEntity<CompradorResponse> actualizar(@PathVariable Integer id, @Valid @RequestBody CompradorRequest request){
-        log.info("Actualizando Comprador con id: {}", id);
+    @PutMapping("/{id}")
+    public ResponseEntity<CompradorResponse> actualizar(@PathVariable Long id, @Valid @RequestBody CompradorRequest request) {
+        log.info("Actualizando comprador con id: {}", id);
         CompradorResponse response = compradorService.actualizar(id, request);
         return ResponseEntity.ok(response);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<CompradorResponse> eliminar(@PathVariable Integer id){
+    public ResponseEntity<Void> eliminar(@PathVariable Long id) {
         log.info("Eliminando comprador con id: {}", id);
         compradorService.eliminar(id);
         return ResponseEntity.noContent().build();

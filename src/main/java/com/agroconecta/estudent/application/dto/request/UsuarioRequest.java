@@ -30,7 +30,6 @@ public record UsuarioRequest(
         @Size(max = 80, message = "Los apellidos admiten máximo 80 caracteres")
         String apellidos,
 
-        @NotNull(message = "El comprador es requerido")
         Long idComprador,
 
         @NotNull(message = "El estado activo es requerido")
