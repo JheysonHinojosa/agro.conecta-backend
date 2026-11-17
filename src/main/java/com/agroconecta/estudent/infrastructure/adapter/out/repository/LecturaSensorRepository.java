@@ -14,4 +14,13 @@ public interface LecturaSensorRepository extends JpaRepository<LecturaSensorEnti
            order by l.fechaLectura desc
            """)
     List<LecturaSensorEntity> findAllConSensor();
+
+    @Query("""
+           select l from LecturaSensorEntity l
+           join fetch l.sensor s
+           where l.idLectura in (
+               select max(l2.idLectura) from LecturaSensorEntity l2 group by l2.sensor.idSensor
+           )
+           """)
+    List<LecturaSensorEntity> findUltimasLecturasPorSensor();
 }

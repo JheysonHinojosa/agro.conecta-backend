@@ -22,16 +22,13 @@ public record UsuarioRequest(
         @Size(min = 4, max = 100, message = "La contraseña debe tener entre 4 y 100 caracteres")
         String passwordHash,
 
-        @NotBlank(message = "El nombre es requerido")
         @Size(max = 80, message = "Los nombres admiten máximo 80 caracteres")
         String nombres,
 
-        @NotBlank(message = "El apellido es requerido")
         @Size(max = 80, message = "Los apellidos admiten máximo 80 caracteres")
         String apellidos,
 
         Long idComprador,
 
-        @NotNull(message = "El estado activo es requerido")
         Boolean activo
 ) {}

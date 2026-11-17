@@ -15,4 +15,12 @@ public interface DetallePedidoRepository extends JpaRepository<DetallePedidoEnti
     BigDecimal sumarSubtotales(@Param("idPedido") Long idPedido);
 
     boolean existsByPedidoIdPedidoAndLoteIdLote(Long idPedido, Long idLote);
+
+    @Query("""
+           select d from DetallePedidoEntity d
+           join fetch d.pedido
+           join fetch d.producto
+           join fetch d.lote
+           """)
+    java.util.List<DetallePedidoEntity> findAllConRelaciones();
 }

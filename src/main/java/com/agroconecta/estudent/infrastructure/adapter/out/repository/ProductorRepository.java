@@ -17,6 +17,8 @@ public interface ProductorRepository extends JpaRepository<ProductorEntity, Long
 
     boolean existsByEmailAndIdProductorNot(String email, Long idProductor);
 
+    boolean existsByCategoriaPrincipalIdCategoria(Integer idCategoria);
+
     @Query("""
            select p from ProductorEntity p
            join fetch p.tipoDocumento

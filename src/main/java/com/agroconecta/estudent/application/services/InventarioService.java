@@ -15,5 +15,7 @@ public interface InventarioService {
 
     InventarioResponse actualizar(Long id, InventarioRequest request);
 
+    InventarioResponse actualizarMinimo(Long id, java.math.BigDecimal stockMinimo);
+
     void eliminar(Long id);
 }

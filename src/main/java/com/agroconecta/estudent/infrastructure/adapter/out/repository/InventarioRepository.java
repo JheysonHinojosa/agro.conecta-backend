@@ -16,4 +16,11 @@ public interface InventarioRepository extends JpaRepository<InventarioEntity, Lo
     @Lock(LockModeType.PESSIMISTIC_WRITE)
     @Query("select i from InventarioEntity i where i.idInventario = :id")
     Optional<InventarioEntity> findByIdForUpdate(@Param("id") Long id);
+
+    @Query("""
+           select i from InventarioEntity i
+           join fetch i.centroAcopio
+           join fetch i.producto
+           """)
+    java.util.List<InventarioEntity> findAllConRelaciones();
 }

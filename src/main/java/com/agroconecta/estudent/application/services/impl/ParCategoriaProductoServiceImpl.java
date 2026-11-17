@@ -6,6 +6,8 @@ import com.agroconecta.estudent.infrastructure.adapter.out.mapper.ParCategoriaPr
 import com.agroconecta.estudent.application.services.ParCategoriaProductoService;
 import com.agroconecta.estudent.infrastructure.adapter.out.Entity.ParCategoriaProductoEntity;
 import com.agroconecta.estudent.infrastructure.adapter.out.repository.ParCategoriaProductoRepository;
+import com.agroconecta.estudent.infrastructure.adapter.out.repository.ProductoRepository;
+import com.agroconecta.estudent.infrastructure.adapter.out.repository.ProductorRepository;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -19,6 +21,8 @@ import java.util.List;
 public class ParCategoriaProductoServiceImpl implements ParCategoriaProductoService {
 
     private final ParCategoriaProductoRepository categoriaRepository;
+    private final ProductoRepository productoRepository;
+    private final ProductorRepository productorRepository;
     private final ParCategoriaProductoMapper categoriaMapper;
 
     @Override
@@ -64,8 +68,13 @@ public class ParCategoriaProductoServiceImpl implements ParCategoriaProductoServ
 
     @Override
     public void eliminar(Integer id) {
-        // Eliminación lógica: la categoría está referenciada por productos y productores
         ParCategoriaProductoEntity entity = buscarCategoria(id);
+
+        if (productoRepository.existsByCategoriaIdCategoria(id) ||
+                productorRepository.existsByCategoriaPrincipalIdCategoria(id)) {
+            throw new IllegalStateException("La categoría de producto tiene registros asociados (productos o productores) y no puede ser eliminada");
+        }
+
         entity.setActivo(false);
         categoriaRepository.save(entity);
     }

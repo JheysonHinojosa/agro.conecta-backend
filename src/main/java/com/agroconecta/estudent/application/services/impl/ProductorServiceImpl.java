@@ -33,12 +33,21 @@ public class ProductorServiceImpl implements ProductorService {
                 request.idTipoDocumento(), request.nroDocumento())) {
             throw new IllegalArgumentException("Ya existe un productor con ese documento");
         }
-        if (productorRepository.existsByEmail(request.email())) {
+
+        String email = normalizar(request.email());
+        String telefono = normalizar(request.telefono());
+        String direccion = normalizar(request.direccion());
+
+        if (email != null && productorRepository.existsByEmail(email)) {
             throw new IllegalArgumentException("El email ya está registrado");
         }
 
         ProductorEntity entity = productorMapper.toEntity(request);
         asignarRelaciones(entity, request);
+        entity.setEmail(email);
+        entity.setTelefono(telefono);
+        entity.setDireccion(direccion);
+        entity.setActivo(request.activo() != null ? request.activo() : true);
         entity.setFechaRegistro(LocalDate.now());
 
         return productorMapper.toResponse(productorRepository.save(entity));
@@ -63,19 +72,33 @@ public class ProductorServiceImpl implements ProductorService {
     public ProductorResponse actualizar(Long id, ProductorRequest request) {
 
         ProductorEntity entity = buscarProductor(id);
+        boolean activoActual = entity.isActivo();
 
         if (productorRepository.existsByTipoDocumentoIdTipoDocumentoAndNroDocumentoAndIdProductorNot(
                 request.idTipoDocumento(), request.nroDocumento(), id)) {
             throw new IllegalArgumentException("Ya existe un productor con ese documento");
         }
-        if (productorRepository.existsByEmailAndIdProductorNot(request.email(), id)) {
+
+        String email = normalizar(request.email());
+        String telefono = normalizar(request.telefono());
+        String direccion = normalizar(request.direccion());
+
+        if (email != null && productorRepository.existsByEmailAndIdProductorNot(email, id)) {
             throw new IllegalArgumentException("El email ya está registrado");
         }
 
         productorMapper.updateEntity(entity, request);
         asignarRelaciones(entity, request);
+        entity.setEmail(email);
+        entity.setTelefono(telefono);
+        entity.setDireccion(direccion);
+        entity.setActivo(request.activo() != null ? request.activo() : activoActual);
 
         return productorMapper.toResponse(productorRepository.save(entity));
+    }
+
+    private String normalizar(String s) {
+        return (s != null && !s.isBlank()) ? s.trim() : null;
     }
 
     @Override

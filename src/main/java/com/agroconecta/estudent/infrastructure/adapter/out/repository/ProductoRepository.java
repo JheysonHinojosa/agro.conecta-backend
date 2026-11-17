@@ -12,6 +12,8 @@ public interface ProductoRepository extends JpaRepository<ProductoEntity, Long> 
 
     boolean existsByCodigoAndIdProductoNot(String codigo, Long idProducto);
 
+    boolean existsByCategoriaIdCategoria(Integer idCategoria);
+
     @Query("""
            select p from ProductoEntity p
            join fetch p.categoria

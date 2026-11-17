@@ -75,6 +75,13 @@ public class InventarioServiceImpl implements InventarioService {
     }
 
     @Override
+    public InventarioResponse actualizarMinimo(Long id, java.math.BigDecimal stockMinimo) {
+        InventarioEntity entity = buscarInventario(id);
+        entity.setStockMinimo(stockMinimo);
+        return inventarioMapper.toResponse(inventarioRepository.save(entity));
+    }
+
+    @Override
     public void eliminar(Long id) {
         // La tabla inventario no tiene columna "activo", por eso el borrado es físico
         inventarioRepository.delete(buscarInventario(id));

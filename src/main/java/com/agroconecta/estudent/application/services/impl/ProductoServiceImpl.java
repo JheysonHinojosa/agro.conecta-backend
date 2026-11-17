@@ -37,6 +37,7 @@ public class ProductoServiceImpl implements ProductoService {
 
         ProductoEntity entity = productoMapper.toEntity(request);
         entity.setCodigo(codigo);
+        entity.setActivo(request.activo() != null ? request.activo() : true);
         asignarRelaciones(entity, request);
 
         return productoMapper.toResponse(productoRepository.save(entity));
@@ -67,8 +68,10 @@ public class ProductoServiceImpl implements ProductoService {
             throw new IllegalArgumentException("El código de producto ya está en uso");
         }
 
+        boolean activoActual = entity.isActivo();
         productoMapper.updateEntity(entity, request);
         entity.setCodigo(codigo);
+        entity.setActivo(request.activo() != null ? request.activo() : activoActual);
         asignarRelaciones(entity, request);
 
         return productoMapper.toResponse(productoRepository.save(entity));

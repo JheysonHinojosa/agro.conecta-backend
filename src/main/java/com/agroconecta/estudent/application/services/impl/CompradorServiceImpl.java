@@ -37,12 +37,23 @@ public class CompradorServiceImpl implements CompradorService {
                 request.idTipoDocumento(), request.nroDocumento())) {
             throw new IllegalArgumentException("Ya existe un comprador con ese documento");
         }
-        if (compradorRepository.existsByEmail(request.email())) {
+
+        String email = normalizar(request.email());
+        String telefono = normalizar(request.telefono());
+        String direccion = normalizar(request.direccion());
+        String ciudad = normalizar(request.ciudad());
+
+        if (email != null && compradorRepository.existsByEmail(email)) {
             throw new IllegalArgumentException("El email ya está registrado");
         }
 
         CompradorEntity entity = compradorMapper.toEntity(request);
         asignarRelaciones(entity, request);
+        entity.setEmail(email);
+        entity.setTelefono(telefono);
+        entity.setDireccion(direccion);
+        entity.setCiudad(ciudad);
+        entity.setActivo(request.activo() != null ? request.activo() : true);
 
         return compradorMapper.toResponse(compradorRepository.save(entity));
     }
@@ -50,7 +61,7 @@ public class CompradorServiceImpl implements CompradorService {
     @Override
     @Transactional(readOnly = true)
     public List<CompradorResponse> listar() {
-        return compradorRepository.findAll()
+        return compradorRepository.findAllConRelaciones()
                 .stream()
                 .map(compradorMapper::toResponse)
                 .toList();
@@ -66,19 +77,35 @@ public class CompradorServiceImpl implements CompradorService {
     public CompradorResponse actualizar(Long id, CompradorRequest request) {
 
         CompradorEntity entity = buscarComprador(id);
+        boolean activoActual = entity.isActivo();
 
         if (compradorRepository.existsByTipoDocumentoIdTipoDocumentoAndNroDocumentoAndIdCompradorNot(
                 request.idTipoDocumento(), request.nroDocumento(), id)) {
             throw new IllegalArgumentException("Ya existe un comprador con ese documento");
         }
-        if (compradorRepository.existsByEmailAndIdCompradorNot(request.email(), id)) {
+
+        String email = normalizar(request.email());
+        String telefono = normalizar(request.telefono());
+        String direccion = normalizar(request.direccion());
+        String ciudad = normalizar(request.ciudad());
+
+        if (email != null && compradorRepository.existsByEmailAndIdCompradorNot(email, id)) {
             throw new IllegalArgumentException("El email ya está registrado");
         }
 
         compradorMapper.updateEntity(entity, request);
         asignarRelaciones(entity, request);
+        entity.setEmail(email);
+        entity.setTelefono(telefono);
+        entity.setDireccion(direccion);
+        entity.setCiudad(ciudad);
+        entity.setActivo(request.activo() != null ? request.activo() : activoActual);
 
         return compradorMapper.toResponse(compradorRepository.save(entity));
+    }
+
+    private String normalizar(String s) {
+        return (s != null && !s.isBlank()) ? s.trim() : null;
     }
 
     @Override

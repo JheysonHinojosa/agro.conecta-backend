@@ -47,8 +47,9 @@ public class UsuarioServiceImpl implements UsuarioService {
         }
 
         UsuarioEntity entity = usuarioMapper.toEntity(request);
+        resolverNombresYApellidos(entity, request.username(), request.nombres(), request.apellidos(), true);
+        entity.setActivo(request.activo() != null ? request.activo() : true);
         entity.setPasswordHash(passwordEncoder.encode(request.passwordHash()));
-        entity.setRol(buscarRol(request.idRol()));
         ParRolEntity rol = buscarRol(request.idRol());
         entity.setRol(rol);
         entity.setComprador(resolverComprador(rol, request.idComprador()));
@@ -59,7 +60,7 @@ public class UsuarioServiceImpl implements UsuarioService {
     @Override
     @Transactional(readOnly = true)
     public List<UsuarioResponse> listar() {
-        return usuarioRepository.findAll()
+        return usuarioRepository.findAllConRol()
                 .stream()
                 .map(usuarioMapper::toResponse)
                 .toList();
@@ -75,6 +76,7 @@ public class UsuarioServiceImpl implements UsuarioService {
     public UsuarioResponse actualizar(Long id, UsuarioRequest request) {
 
         UsuarioEntity entity = buscarUsuario(id);
+        boolean activoActual = entity.isActivo();
 
         if (usuarioRepository.existsByUsernameAndIdUsuarioNot(request.username(), id)) {
             throw new IllegalArgumentException("El username ya está en uso");
@@ -84,7 +86,8 @@ public class UsuarioServiceImpl implements UsuarioService {
         }
 
         usuarioMapper.updateEntity(entity, request);
-        entity.setRol(buscarRol(request.idRol()));
+        resolverNombresYApellidos(entity, request.username(), request.nombres(), request.apellidos(), false);
+        entity.setActivo(request.activo() != null ? request.activo() : activoActual);
         ParRolEntity rol = buscarRol(request.idRol());
         entity.setRol(rol);
         entity.setComprador(resolverComprador(rol, request.idComprador()));
@@ -98,6 +101,25 @@ public class UsuarioServiceImpl implements UsuarioService {
         }
 
         return usuarioMapper.toResponse(usuarioRepository.save(entity));
+    }
+
+    private void resolverNombresYApellidos(UsuarioEntity entity, String username, String nombresReq, String apellidosReq, boolean esCreacion) {
+        if (esCreacion) {
+            entity.setNombres((nombresReq != null && !nombresReq.isBlank()) ? nombresReq.trim() : username.trim());
+            entity.setApellidos((apellidosReq != null && !apellidosReq.isBlank()) ? apellidosReq.trim() : "-");
+        } else {
+            if (nombresReq != null && !nombresReq.isBlank()) {
+                entity.setNombres(nombresReq.trim());
+            } else if (entity.getNombres() == null || entity.getNombres().isBlank()) {
+                entity.setNombres(username.trim());
+            }
+
+            if (apellidosReq != null && !apellidosReq.isBlank()) {
+                entity.setApellidos(apellidosReq.trim());
+            } else if (entity.getApellidos() == null || entity.getApellidos().isBlank()) {
+                entity.setApellidos("-");
+            }
+        }
     }
 
     @Override

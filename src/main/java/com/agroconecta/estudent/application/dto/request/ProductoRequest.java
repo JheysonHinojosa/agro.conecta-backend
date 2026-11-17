@@ -34,6 +34,5 @@ public record ProductoRequest(
         @NotNull(message = "El productor es requerido")
         Long idProductor,
 
-        @NotNull(message = "El estado activo es requerido")
         Boolean activo
 ) {}
