@@ -8,6 +8,8 @@ import java.util.List;
 
 public interface MovimientoInventarioRepository extends JpaRepository<MovimientoInventarioEntity, Long> {
 
+    List<MovimientoInventarioEntity> findByPedidoIdPedidoAndTipoMovimientoCodigo(Long idPedido, String codigo);
+
     @Query("""
            select m from MovimientoInventarioEntity m
            join fetch m.inventario

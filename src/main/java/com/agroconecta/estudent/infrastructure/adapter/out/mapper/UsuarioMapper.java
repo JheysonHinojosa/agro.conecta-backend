@@ -3,9 +3,11 @@ package com.agroconecta.estudent.application.mapper;
 import com.agroconecta.estudent.application.dto.request.UsuarioRequest;
 import com.agroconecta.estudent.application.dto.response.UsuarioResponse;
 import com.agroconecta.estudent.infrastructure.adapter.out.Entity.UsuarioEntity;
+import org.mapstruct.BeanMapping;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.MappingTarget;
+import org.mapstruct.NullValuePropertyMappingStrategy;
 
 @Mapper(componentModel = "spring")
 public interface UsuarioMapper {
@@ -21,6 +23,7 @@ public interface UsuarioMapper {
     @Mapping(target = "updatedBy", ignore = true)
     UsuarioEntity toEntity(UsuarioRequest request);
 
+    @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
     @Mapping(target = "idUsuario", ignore = true)
     @Mapping(target = "rol", ignore = true)
     @Mapping(target = "comprador", ignore = true)

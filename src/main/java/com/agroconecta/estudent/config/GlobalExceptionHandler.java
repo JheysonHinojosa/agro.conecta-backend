@@ -12,6 +12,8 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+import org.springframework.web.servlet.NoHandlerFoundException;
+import org.springframework.web.servlet.resource.NoResourceFoundException;
 
 import java.time.OffsetDateTime;
 import java.util.LinkedHashMap;
@@ -31,9 +33,12 @@ public class GlobalExceptionHandler {
         return build(HttpStatus.FORBIDDEN, "No tienes permiso para esta operación.", req, null);
     }
 
-    @ExceptionHandler(EntityNotFoundException.class)
-    public ResponseEntity<Map<String, Object>> notFound(EntityNotFoundException ex, HttpServletRequest req) {
-        return build(HttpStatus.NOT_FOUND, ex.getMessage(), req, null);
+    @ExceptionHandler({EntityNotFoundException.class, NoResourceFoundException.class, NoHandlerFoundException.class})
+    public ResponseEntity<Map<String, Object>> notFound(Exception ex, HttpServletRequest req) {
+        String msg = (ex instanceof EntityNotFoundException)
+                ? ex.getMessage()
+                : "El recurso solicitado no fue encontrado.";
+        return build(HttpStatus.NOT_FOUND, msg, req, null);
     }
 
     @ExceptionHandler(IllegalArgumentException.class)

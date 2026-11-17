@@ -13,6 +13,8 @@ public interface InventarioRepository extends JpaRepository<InventarioEntity, Lo
     boolean existsByCentroAcopioIdCentroAcopioAndProductoIdProductoAndIdInventarioNot(
             Long idCentroAcopio, Long idProducto, Long idInventario);
 
+    Optional<InventarioEntity> findByCentroAcopioIdCentroAcopioAndProductoIdProducto(Long idCentroAcopio, Long idProducto);
+
     @Lock(LockModeType.PESSIMISTIC_WRITE)
     @Query("select i from InventarioEntity i where i.idInventario = :id")
     Optional<InventarioEntity> findByIdForUpdate(@Param("id") Long id);
