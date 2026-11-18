@@ -10,6 +10,8 @@ public interface MovimientoInventarioRepository extends JpaRepository<Movimiento
 
     List<MovimientoInventarioEntity> findByPedidoIdPedidoAndTipoMovimientoCodigo(Long idPedido, String codigo);
 
+    List<MovimientoInventarioEntity> findByPedidoIdPedidoAndObservacionStartingWith(Long idPedido, String prefijo);
+
     @Query("""
            select m from MovimientoInventarioEntity m
            join fetch m.inventario

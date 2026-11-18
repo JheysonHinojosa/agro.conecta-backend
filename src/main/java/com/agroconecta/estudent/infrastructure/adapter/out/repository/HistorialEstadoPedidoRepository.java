@@ -8,6 +8,8 @@ import java.util.List;
 
 public interface HistorialEstadoPedidoRepository extends JpaRepository<HistorialEstadoPedidoEntity, Long> {
 
+    List<HistorialEstadoPedidoEntity> findByPedidoIdPedidoOrderByFechaCambioAscIdHistorialAsc(Long idPedido);
+
     @Query("""
            select h from HistorialEstadoPedidoEntity h
            join fetch h.pedido

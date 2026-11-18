@@ -16,6 +16,8 @@ public interface DetallePedidoRepository extends JpaRepository<DetallePedidoEnti
 
     boolean existsByPedidoIdPedidoAndLoteIdLote(Long idPedido, Long idLote);
 
+    java.util.List<DetallePedidoEntity> findByPedidoIdPedidoOrderByIdDetallePedidoAsc(Long idPedido);
+
     @Query("""
            select d from DetallePedidoEntity d
            join fetch d.pedido
