@@ -41,6 +41,10 @@ public class ResenaLoteServiceImpl implements ResenaLoteService {
         CompradorEntity comprador = buscarComprador(request.idComprador());
         PedidoEntity pedido = buscarPedido(request.idPedido());
 
+        if (!pedidoEntregado(pedido)) {
+            throw new IllegalArgumentException("Solo se pueden registrar reseñas para pedidos entregados");
+        }
+
         // El pedido debe ser del comprador
         if (!pedido.getComprador().getIdComprador().equals(comprador.getIdComprador())) {
             throw new IllegalArgumentException("El pedido no pertenece al comprador indicado");
@@ -63,6 +67,14 @@ public class ResenaLoteServiceImpl implements ResenaLoteService {
         entity.setFechaResena(OffsetDateTime.now());
 
         return resenaMapper.toResponse(resenaRepository.save(entity));
+    }
+
+    private boolean pedidoEntregado(PedidoEntity pedido) {
+        if (pedido.getEstadoPedido() == null) {
+            return false;
+        }
+        return "ENTREGADO".equalsIgnoreCase(pedido.getEstadoPedido().getCodigo())
+                || "ENTREGADO".equalsIgnoreCase(pedido.getEstadoPedido().getNombre());
     }
 
     @Override

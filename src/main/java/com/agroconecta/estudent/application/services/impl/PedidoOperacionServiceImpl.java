@@ -169,7 +169,7 @@ public class PedidoOperacionServiceImpl implements PedidoOperacionService {
             if (!producto.isActivo()) {
                 throw new IllegalArgumentException("El producto está inactivo");
             }
-            if (producto.getPrecioReferencial() == null || producto.getPrecioReferencial().signum() < 0) {
+            if (producto.getPrecioReferencial() == null || producto.getPrecioReferencial().signum() <= 0) {
                 throw new IllegalArgumentException("El producto no tiene un precio referencial válido");
             }
             ParMonedaEntity monedaProducto = producto.getMoneda();

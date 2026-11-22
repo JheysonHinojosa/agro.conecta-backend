@@ -24,7 +24,7 @@ public record ProductoRequest(
         Integer idUnidadMedida,
 
         @NotNull(message = "El precio referencial es requerido")
-        @PositiveOrZero(message = "El precio referencial no puede ser negativo")
+        @Positive(message = "El precio referencial debe ser mayor a cero")
         @Digits(integer = 10, fraction = 2, message = "El precio admite hasta 10 enteros y 2 decimales")
         BigDecimal precioReferencial,
 

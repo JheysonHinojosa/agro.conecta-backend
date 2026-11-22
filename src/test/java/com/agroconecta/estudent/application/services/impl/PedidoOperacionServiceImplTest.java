@@ -166,6 +166,20 @@ class PedidoOperacionServiceImplTest {
     }
 
     @Test
+    void crear_rechazaPrecioCeroSinGuardarPedidoNiDescontarStock() {
+        ProductoEntity producto = productoRepository.findById(idProducto).orElseThrow();
+        producto.setPrecioReferencial(BigDecimal.ZERO);
+        productoRepository.saveAndFlush(producto);
+
+        assertThrows(IllegalArgumentException.class,
+                () -> service.crear(request(new BigDecimal("1.00"))));
+
+        assertEquals(0, pedidoRepository.count());
+        assertEquals(new BigDecimal("10.00"),
+                inventarioRepository.findById(idInventario).orElseThrow().getStockActual());
+    }
+
+    @Test
     void crear_stockInsuficienteNoGuardaPedidoNiDescuentaInventario() {
         assertThrows(IllegalArgumentException.class,
                 () -> service.crear(request(new BigDecimal("10.01"))));
